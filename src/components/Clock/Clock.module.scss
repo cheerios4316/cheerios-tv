@@ -1,0 +1,40 @@
+.clock {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  user-select: none;
+
+  &:hover &__separator {
+    width: 120px;
+  }
+
+  &__separator {
+    margin-top: 1px;
+    width: 12px;
+    height: 1px;
+    border-radius: 3px;
+    background-color: white;
+    transition: all .2s ease;
+  }
+
+  &__date {
+    font-size: 1.1rem;
+    line-height: 1;
+  }
+}
+
+.time {
+  font-size: 3rem;
+  font-weight: bold;
+  line-height: 1;
+
+  > :nth-child(odd) {
+    color: #ddd;
+  }
+
+  > :nth-child(even) {
+    color: rgb(187, 15, 15);
+  }
+}

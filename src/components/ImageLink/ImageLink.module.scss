@@ -1,0 +1,93 @@
+.image-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: end;
+
+  cursor: pointer;
+
+  padding: 0.4rem;
+  gap: 2rem;
+
+  &:hover &__background {
+    width: 10rem;
+    height: 10rem;
+  }
+
+  &:hover > span {
+    transform: translateY(-.5rem);
+  }
+
+  &:hover span .subtitle {
+    transform: scaleX(1);
+  }
+
+  animation: fallIn 2s cubic-bezier(0.2, 0.8, 0.4, 1);
+
+  &__container {
+    width: 8rem;
+    height: 8rem;
+
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & > img {
+      position: absolute;
+      user-select: none;
+      z-index: 20;
+    }
+  }
+
+  &__background {
+    position: absolute;
+    z-index: 10;
+
+    width: 0rem;
+    height: 0rem;
+
+    aspect-ratio: 1;
+
+    border-radius: 100%;
+
+    background-color: #444;
+
+    opacity: .4;
+
+    transition: all .2s ease;
+  }
+
+  & > span {
+    user-select: none;
+    font-size: 1.2rem;
+    transition: all .5s ease-out;
+
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@keyframes fallIn {
+  0% {
+    transform: translateY(-3rem);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.subtitle {
+    width: 100%;
+    height: 1px;
+    background-color: white;
+
+    transform-origin: center;
+
+    transform: scaleX(0);
+    transition: all .5s ease-out;
+}
