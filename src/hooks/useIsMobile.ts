@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 export const useIsMobile = (breakpoint = 768): boolean => {
-    const [isMobile, setIsMobile] = useState(() => window.innerWidth < breakpoint);
+    const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
         const mediaQuery = window.matchMedia(`(max-width: ${breakpoint}px)`);
@@ -16,4 +16,4 @@ export const useIsMobile = (breakpoint = 768): boolean => {
     }, [breakpoint]);
 
     return isMobile;
-}
+};
