@@ -3,6 +3,7 @@
 import { FC } from "react";
 import styles from "./ImageLink.module.scss";
 import Image from "next/image";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 interface IImageLinkProps {
   imageUrl: string;
@@ -11,8 +12,7 @@ interface IImageLinkProps {
 }
 
 const ImageLink: FC<IImageLinkProps> = ({ imageUrl, anchor, href }) => {
-
-  const imageSize = 300;
+  const imageSize = useIsMobile() ? 100 : 300;
 
   const onClick = () => {
     window.open(href, "_blank");
