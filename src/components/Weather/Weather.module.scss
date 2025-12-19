@@ -1,0 +1,65 @@
+.weather {
+  width: max-content;
+  user-select: none;
+  cursor: pointer;
+
+  padding: 0.3rem 0.7rem;
+  border-radius: 15px;
+
+  transition: all 0.1s;
+
+  &:hover + .hint {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  &:hover {
+    background-color: #222;
+  }
+
+  &__icon-temp {
+    display: flex;
+    flex-direction: column;
+
+    & > span {
+      font-size: 2.2rem;
+      line-height: 1;
+      font-weight: bold;
+    }
+  }
+
+  &__description {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 1.2rem;
+    line-height: 1;
+
+    & > svg {
+      --size: 1.8rem;
+      width: var(--size);
+      height: var(--size);
+    }
+  }
+}
+
+.red {
+  color: #bb0f0f;
+}
+
+.hint {
+  display: inline-block;
+  opacity: 0;
+
+  transition: opacity 0.1s ease, transform 0.1s ease;
+  transform: translateY(-1rem);
+  color: #888;
+  user-select: none;
+}
+
+.container {
+  max-width: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

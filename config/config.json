@@ -1,5 +1,6 @@
 {
   "searchEndpoint": "https://duckduckgo.com/",
+  "weather": true,
   "links": [
     {
       "image": "/images/youtube.png",

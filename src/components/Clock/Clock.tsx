@@ -20,7 +20,8 @@ const Clock: FC = () => {
   return (
     <div className={styles["clock"]}>
       <div className={styles["clock__date"]}>
-        {formattedDate.day.formatted} of {formattedDate.month.formatted}, {formattedDate.year}
+        {formattedDate.day.formatted} of {formattedDate.month.formatted},{" "}
+        {formattedDate.year}
       </div>
       <div className={styles["clock__separator"]}></div>
       <div className={styles["time"]}>

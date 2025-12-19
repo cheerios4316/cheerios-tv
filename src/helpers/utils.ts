@@ -1,3 +1,5 @@
+import { IDateFormatted } from "@/interface";
+
 export const months = [
   "January",
   "February",
@@ -31,23 +33,7 @@ export const getOrdinalSuffix = (number: number): string => {
   }
 };
 
-export interface IDateNumeric {
-  value: number;
-  formatted?: string;
-}
-
-export interface IDateFormatted {
-  day: IDateNumeric;
-  month: IDateNumeric;
-  year: number;
-  time: {
-    hours: IDateNumeric;
-    minutes: IDateNumeric;
-    seconds: IDateNumeric;
-  };
-}
-
-export const formatDate = (date: Date) => {
+export const formatDate = (date: Date): IDateFormatted => {
   const pad = (date: Date, func: () => number) =>
     String(func.call(date)).padStart(2, "0");
 

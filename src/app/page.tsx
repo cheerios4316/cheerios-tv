@@ -4,8 +4,9 @@ import styles from "./page.module.scss";
 import { SearchBar } from "@/components/SearchBar/SearchBar";
 import { getSettings } from "@/helpers/settings";
 import Image from "next/image";
+import { Weather } from "@/components/Weather/Weather";
 
-export default function Home() {
+const Home = async () => {
   const settings = getSettings();
 
   const links = settings.links ?? [];
@@ -15,6 +16,15 @@ export default function Home() {
       {settings.backgroundImage && (
         <div className={styles["background"]}>
           <Image src={settings.backgroundImage} alt="Background" fill />
+        </div>
+      )}
+
+      {settings.weather && (
+        <div className={styles["weather"]}>
+          <Weather
+            latitude={settings.weather.latitude}
+            longitude={settings.weather.longitude}
+          />
         </div>
       )}
 
@@ -41,4 +51,6 @@ export default function Home() {
       </div>
     </main>
   );
-}
+};
+
+export default Home;
