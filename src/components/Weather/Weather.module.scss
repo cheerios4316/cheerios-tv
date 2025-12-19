@@ -13,8 +13,17 @@
     transform: translateY(0);
   }
 
-  &:hover {
-    background-color: #222;
+  &:hover &__separator {
+    transform: scaleX(1);
+  }
+
+  &__separator {
+    width: 100%;
+    height: 1px;
+    background-color: white;
+    margin: 2px 0px;
+    transform: scaleX(0);
+    transition: all .2s ease;
   }
 
   &__icon-temp {
@@ -51,10 +60,12 @@
   display: inline-block;
   opacity: 0;
 
-  transition: opacity 0.1s ease, transform 0.1s ease;
-  transform: translateY(-1rem);
+  transition: all 0.2s ease;
+  transform: translateY(-.5rem);
   color: #888;
   user-select: none;
+
+  line-height: 1;
 }
 
 .container {
@@ -70,7 +81,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  
+
   & > svg {
     animation: rotate 0.5s linear infinite;
   }

@@ -16,10 +16,14 @@
 }
 
 .weather {
-    width: 100%;
-    height: 100%;
     position: fixed;
     padding: .5rem;
+    top: 0;
+    transition: all .1s linear;
+    
+    @media (max-width: 768px) {
+        transform: scale(.7);
+    }
 }
 
 .separator {

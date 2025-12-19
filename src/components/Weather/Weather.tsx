@@ -5,7 +5,15 @@ import styles from "./Weather.module.scss";
 import { fetchWeather } from "@/actions/fetch-weather";
 import { IWeatherResponse } from "@/interface/api";
 import { getWeatherIcon, WMO_WEATHER_MAP } from "@/helpers/weather";
-import { Loader, Loader2, Loader2Icon, LoaderCircle, LoaderPinwheel, LucideLoader, LucideLoaderCircle } from "lucide-react";
+import {
+  Loader,
+  Loader2,
+  Loader2Icon,
+  LoaderCircle,
+  LoaderPinwheel,
+  LucideLoader,
+  LucideLoaderCircle,
+} from "lucide-react";
 
 interface IWeatherProps {
   latitude: number;
@@ -39,7 +47,11 @@ const Weather: FC<IWeatherProps> = ({ latitude, longitude }) => {
   };
 
   if (!weatherData) {
-    return <div className={styles["loader"]}><Loader2 strokeWidth={2}/></div>;
+    return (
+      <div className={styles["loader"]}>
+        <Loader2 strokeWidth={2} />
+      </div>
+    );
   }
 
   const displayData = getWeatherIcon(
@@ -62,6 +74,7 @@ const Weather: FC<IWeatherProps> = ({ latitude, longitude }) => {
           <Icon strokeWidth={2} />
           {displayData.description}
         </span>
+        <div className={styles["weather__separator"]}></div>
       </div>
       <span className={styles["hint"]}>Click to refresh</span>
     </div>
