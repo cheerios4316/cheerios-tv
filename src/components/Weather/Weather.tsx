@@ -5,6 +5,7 @@ import styles from "./Weather.module.scss";
 import { fetchWeather } from "@/actions/fetch-weather";
 import { IWeatherResponse } from "@/interface/api";
 import { getWeatherIcon, WMO_WEATHER_MAP } from "@/helpers/weather";
+import { Loader, Loader2, Loader2Icon, LoaderCircle, LoaderPinwheel, LucideLoader, LucideLoaderCircle } from "lucide-react";
 
 interface IWeatherProps {
   latitude: number;
@@ -34,11 +35,11 @@ const Weather: FC<IWeatherProps> = ({ latitude, longitude }) => {
 
   const onClick = async () => {
     setWeatherData(null);
-    await getWeather();
+    getWeather();
   };
 
   if (!weatherData) {
-    return null;
+    return <div className={styles["loader"]}><Loader2 strokeWidth={2}/></div>;
   }
 
   const displayData = getWeatherIcon(
