@@ -45,10 +45,12 @@ export const formatDate = (date: Date) => {
 
   const pad = (date: Date, func: () => number) => String(func.call(date)).padStart(2, "0");
 
+  const day = date.getDate();
+
   return {
     day: {
-      value: date.getDate(),
-      formatted: date.getDate() + getOrdinalSuffix(date.getDate()),
+      value: day,
+      formatted: day + getOrdinalSuffix(day),
     },
     month: {
       value: date.getMonth(),
