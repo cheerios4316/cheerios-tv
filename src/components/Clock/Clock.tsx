@@ -34,4 +34,4 @@ const Clock: FC = () => {
   );
 };
 
-export { Clock, type IClockProps };
+export { Clock };
