@@ -1,5 +1,6 @@
 export interface ISettings {
     links: ILink[];
+    searchEndpoint: string;
     backgroundImage?: string;
 }
 

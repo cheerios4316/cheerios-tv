@@ -2,24 +2,9 @@
 
 import { FC, useEffect, useState } from "react";
 import styles from "./Clock.module.scss";
-import { getOrdinalSuffix } from "@/helpers/utils";
+import { formatDate, getOrdinalSuffix } from "@/helpers/utils";
 
 interface IClockProps {}
-
-const monthNames = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
 
 const Clock: FC<IClockProps> = () => {
   const [date, setDate] = useState<Date>(new Date());
@@ -32,22 +17,20 @@ const Clock: FC<IClockProps> = () => {
     return () => clearInterval(timer);
   }, []);
 
-  const dateString = date.getDate() + getOrdinalSuffix(date.getDate());
-  const monthString = monthNames[date.getMonth()];
-  const yearString = date.getFullYear();
+  const formattedDate = formatDate(date);
 
   return (
     <div className={styles["clock"]}>
       <div className={styles["clock__date"]}>
-        {dateString} of {monthString}, {yearString}
+        {formattedDate.day.formatted} of {formattedDate.month.formatted}, {formattedDate.year}
       </div>
       <div className={styles["clock__separator"]}></div>
       <div className={styles["time"]}>
-        <span>{String(date.getHours()).padStart(2, "0")}</span>
+        <span>{formattedDate.time.hours.formatted}</span>
         <span>:</span>
-        <span>{String(date.getMinutes()).padStart(2, "0")}</span>
+        <span>{formattedDate.time.minutes.formatted}</span>
         <span>:</span>
-        <span>{String(date.getSeconds()).padStart(2, "0")}</span>
+        <span>{formattedDate.time.seconds.formatted}</span>
       </div>
     </div>
   );

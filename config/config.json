@@ -1,4 +1,5 @@
 {
+  "searchEndpoint": "https://duckduckgo.com/",
   "links": [
     {
       "image": "/images/youtube.png",
