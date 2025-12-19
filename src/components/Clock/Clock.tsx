@@ -2,11 +2,9 @@
 
 import { FC, useEffect, useState } from "react";
 import styles from "./Clock.module.scss";
-import { formatDate, getOrdinalSuffix } from "@/helpers/utils";
+import { formatDate } from "@/helpers/utils";
 
-interface IClockProps {}
-
-const Clock: FC<IClockProps> = () => {
+const Clock: FC = () => {
   const [date, setDate] = useState<Date>(new Date());
 
   useEffect(() => {

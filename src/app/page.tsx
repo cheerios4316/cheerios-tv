@@ -1,23 +1,22 @@
 import { Clock } from "@/components/Clock/Clock";
 import { ImageLink } from "@/components/ImageLink/ImageLink";
-import { ISettings } from "@/interface";
-import fs from "fs";
-import path from "path";
-
 import styles from "./page.module.scss";
 import { SearchBar } from "@/components/SearchBar/SearchBar";
+import { getSettings } from "@/helpers/settings";
+import Image from "next/image";
 
 export default function Home() {
-  const filePath = path.join(process.cwd(), "/config/config.json");
-
-  const settings = JSON.parse(fs.readFileSync(filePath, "utf8") ?? "") as ISettings;
+  const settings = getSettings();
 
   const links = settings.links ?? [];
 
   return (
     <main className={`${"flex items-center h-[100vh]"}`}>
-
-      {settings.backgroundImage && <div className={styles["background"]}><img src={settings.backgroundImage} alt="Background" /></div>}
+      {settings.backgroundImage && (
+        <div className={styles["background"]}>
+          <Image src={settings.backgroundImage} alt="Background" fill />
+        </div>
+      )}
 
       <div className="flex flex-col md:flex-col-reverse items-center w-full">
         <div className="w-full flex justify-center p-12">
