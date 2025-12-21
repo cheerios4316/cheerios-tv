@@ -1,17 +1,5 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Metadata } from "next";
-import { getSettings } from "@/helpers/settings";
-
-export const metadata: Metadata = await (async () => {
-  const settingsMeta = (await getSettings())?.metadata;
-
-  return {
-    ...settingsMeta,
-    title: settingsMeta?.title || "cheerios-tv",
-    description: settingsMeta?.description || "default cheerios-tv description",
-  };
-})();
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
