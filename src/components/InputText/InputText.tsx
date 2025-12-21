@@ -38,7 +38,7 @@ const InputText: FC<IInputTextProps> = ({
         ref={ref}
         className={styles["input-text"]}
         name={name}
-        value={value}
+        defaultValue={value}
         placeholder={placeholder}
         onChange={(e) => onChange?.(e.target.value)}
       />

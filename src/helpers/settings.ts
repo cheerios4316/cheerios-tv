@@ -14,16 +14,7 @@ export const getSettings = async () => {
     return null;
   }
 
-  const settings = awaitedSettings as ISettings;
-
-  return {
-    ...settings,
-    weather: {
-      ...settings.weather,
-      latitude: parseFloat(process.env.WEATHER_LATITUDE ?? ""),
-      longitude: parseFloat(process.env.WEATHER_LONGITUDE ?? ""),
-    },
-  } as ISettings;
+  return awaitedSettings as ISettings;
 };
 
 export const getDefaultSettings = async (): Promise<ISettings> => ({
