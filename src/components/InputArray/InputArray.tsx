@@ -4,7 +4,7 @@ import { IFormField } from "@/interface/form";
 import { InputText } from "../InputText/InputText";
 import { ILink } from "@/interface";
 import { uppercaseFirst } from "@/helpers/utils";
-import { PlusCircle, Trash, Trash2 } from "lucide-react";
+import { ArrowDown, ArrowUp, PlusCircle, Trash, Trash2 } from "lucide-react";
 
 type StringKeys<T> = {
   [K in keyof T]: T[K] extends string ? K : never;
@@ -17,7 +17,12 @@ type IInputArrayProps<T> = {
   name: string;
 };
 
-const InputArray = <T,>({ name, items, fields, onChange }: IInputArrayProps<T>) => {
+const InputArray = <T,>({
+  name,
+  items,
+  fields,
+  onChange,
+}: IInputArrayProps<T>) => {
   const update = <K extends StringKeys<T>>(
     index: number,
     field: K,
@@ -36,6 +41,20 @@ const InputArray = <T,>({ name, items, fields, onChange }: IInputArrayProps<T>) 
 
   const remove = (index: number) => {
     onChange(items.filter((_, i) => i !== index));
+  };
+
+  const moveUp = (index: number) => {
+    if (index === 0) return;
+    const next = [...items];
+    [next[index - 1], next[index]] = [next[index], next[index - 1]];
+    onChange(next);
+  };
+
+  const moveDown = (index: number) => {
+    if (index === items.length - 1) return;
+    const next = [...items];
+    [next[index + 1], next[index]] = [next[index], next[index + 1]];
+    onChange(next);
   };
 
   return (
@@ -62,14 +81,30 @@ const InputArray = <T,>({ name, items, fields, onChange }: IInputArrayProps<T>) 
             ))}
           </div>
 
-          <button
-            type="button"
-            onMouseDown={(e) => e.stopPropagation()}
-            onClick={() => remove(index)}
-            className={styles["input-array__remove"]}
-          >
-            <Trash strokeWidth={1} />
-          </button>
+          <div className={styles["input-array__element__actions"]}>
+            <button
+              type="button"
+              onMouseDown={(e) => e.stopPropagation()}
+              onClick={() => moveUp(index)}
+            >
+              <ArrowUp />
+            </button>
+            <button
+              type="button"
+              onMouseDown={(e) => e.stopPropagation()}
+              onClick={() => remove(index)}
+              className={styles["input-array__remove"]}
+            >
+              <Trash strokeWidth={1} />
+            </button>
+            <button
+              type="button"
+              onMouseDown={(e) => e.stopPropagation()}
+              onClick={() => moveDown(index)}
+            >
+              <ArrowDown />
+            </button>
+          </div>
         </div>
       ))}
 

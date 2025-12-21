@@ -10,6 +10,22 @@
         align-items: center;
         animation: fade .2s ease;
 
+        &__actions {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+
+            & > button {
+                color: #999;
+                cursor: pointer;
+                transition: all .1s ease;
+
+                &:hover {
+                    color: #ddd;
+                }
+            }
+        }
+
         &__fields {
             display: flex;
             flex-direction: column;

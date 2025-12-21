@@ -25,6 +25,7 @@ const mapSettings = (formData: FormData): ISettings => {
       enable: formData.get("weather-enable") === "true",
       latitude: Number(formData.get("weather-latitude")),
       longitude: Number(formData.get("weather-longitude")),
+      position: formData.get("weather-position") as "top-left"|"top-right"|"bottom-left"|"bottom-right",
     },
     links: mapLinks(formData),
   };
