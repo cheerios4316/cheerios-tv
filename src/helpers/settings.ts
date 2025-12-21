@@ -46,9 +46,5 @@ export const getDefaultSettings = async (): Promise<ISettings> => ({
       url: "https://www.netflix.com",
     },
   ],
-  metadata: {
-    title: "cheerios tv",
-    description: "homepage for my television :)",
-  },
   backgroundImage: "/images/background.jpg",
 });

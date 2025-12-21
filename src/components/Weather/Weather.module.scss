@@ -23,7 +23,7 @@
     background-color: white;
     margin: 2px 0px;
     transform: scaleX(0);
-    transition: all .2s ease;
+    transition: all 0.2s ease;
   }
 
   &__icon-temp {
@@ -61,18 +61,48 @@
   opacity: 0;
 
   transition: all 0.2s ease;
-  transform: translateY(-.5rem);
+  transform: translateY(-0.5rem);
   color: #888;
   user-select: none;
 
   line-height: 1;
 }
 
-.container {
+.container-temp {
   max-width: fit-content;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+
+  &__wind {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    justify-content: center;
+    user-select: none;
+
+    &__speed {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      line-height: 1;
+      font-weight: bold;
+
+      &__value {
+        font-size: 1.5rem;
+      }
+
+      &__unit {
+        font-size: 0.9rem;
+        color: #bb0f0f;
+      }
+    }
+  }
 }
 
 .loader {

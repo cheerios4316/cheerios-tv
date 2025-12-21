@@ -30,8 +30,6 @@ const SettingsForm: FC<ISettingsFormProps> = ({ config }) => {
 
     const newSettings = mapper.settings(formData);
 
-    console.log(formData.get("weather-position"));
-
     setCookie("settings", JSON.stringify(newSettings));
   };
 
