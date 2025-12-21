@@ -3,8 +3,8 @@ import "./globals.css";
 import { Metadata } from "next";
 import { getSettings } from "@/helpers/settings";
 
-export const metadata: Metadata = (() => {
-  const settingsMeta = getSettings().metadata;
+export const metadata: Metadata = await (async () => {
+  const settingsMeta = (await getSettings())?.metadata;
 
   return {
     ...settingsMeta,

@@ -1,0 +1,35 @@
+.input-array {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    &__element {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-evenly;
+        align-items: center;
+        animation: fade .2s ease;
+
+        &__fields {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+
+            &__number {
+                font-size: 3rem;
+            }
+        }
+    }
+}
+
+@keyframes fade {
+    0% {
+        opacity: 0;
+        filter: blur(12px);
+    }
+
+    100% {
+        opacity: 1;
+        filter: blur(0);
+    }
+}

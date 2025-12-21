@@ -1,0 +1,37 @@
+.input-toggle {
+  max-width: fit-content;
+  padding: 0.3rem 0.7rem;
+  border-radius: 20rem;
+  display: flex;
+  gap: .7rem;
+  background-color: #ffffff10;
+  align-items: center;
+
+  &__label {
+    color: #999;
+    user-select: none;
+  }
+
+  &__toggler {
+    width: 3rem;
+    background-color: #444;
+    border-radius: 2rem;
+    display: flex;
+    align-items: center;
+    padding: .2rem;
+    cursor: pointer;
+
+    &__ball {
+        height: 1rem;
+        width: 1rem;
+        background-color: #222;
+        border-radius: 100%;
+        transition: all .2s ease;
+        
+        &--active {
+            transform: translateX(1.55rem);
+            background-color: #999;
+        }
+    }
+  }
+}

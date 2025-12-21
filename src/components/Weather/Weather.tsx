@@ -4,15 +4,9 @@ import { FC, useEffect, useState } from "react";
 import styles from "./Weather.module.scss";
 import { fetchWeather } from "@/actions/fetch-weather";
 import { IWeatherResponse } from "@/interface/api";
-import { getWeatherIcon, WMO_WEATHER_MAP } from "@/helpers/weather";
+import { getWeatherIcon } from "@/helpers/weather";
 import {
-  Loader,
   Loader2,
-  Loader2Icon,
-  LoaderCircle,
-  LoaderPinwheel,
-  LucideLoader,
-  LucideLoaderCircle,
 } from "lucide-react";
 
 interface IWeatherProps {
@@ -27,8 +21,6 @@ const Weather: FC<IWeatherProps> = ({ latitude, longitude }) => {
 
   const getWeather = async () => {
     const data = await fetchWeather(latitude, longitude);
-
-    console.log(data);
 
     setWeatherData(data);
   };

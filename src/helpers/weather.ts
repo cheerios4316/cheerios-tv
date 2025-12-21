@@ -1,4 +1,4 @@
-import { IWeatherIcon } from "@/interface";
+import { ISettings, IWeatherIcon, IWeatherSettings } from "@/interface";
 import {
   Sun,
   Cloud,

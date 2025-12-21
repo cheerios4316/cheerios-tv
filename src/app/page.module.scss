@@ -1,42 +1,58 @@
 .background {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    opacity: .14;
-    inset: 0;
-    user-select: none;
-    pointer-events: none;
-    z-index: -1;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  opacity: 0.14;
+  inset: 0;
+  user-select: none;
+  pointer-events: none;
+  z-index: -1;
 
-    & > img {
-        object-fit: cover;
-        width: 100vw;
-        height: 100vh;
-    }
+  & > img {
+    object-fit: cover;
+    width: 100vw;
+    height: 100vh;
+  }
 }
 
 .weather {
-    position: fixed;
-    padding: .5rem;
+  position: fixed;
+  padding: 0.5rem;
+  transition: all 0.1s linear;
+
+  @media (max-width: 768px) {
+    transform: scale(0.7);
+  }
+
+  &--top-left {
     top: 0;
-    transition: all .1s linear;
-    
-    @media (max-width: 768px) {
-        transform: scale(.7);
-    }
+  }
+
+  &--top-right {
+    top: 0;
+    right: 0;
+  }
+
+  &--bottom-right {
+    bottom: 0;
+    right: 0;
+  }
+
+  &--bottom-left {
+    bottom: 0;
+  }
 }
 
 .separator {
-    animation: expandRight 2s cubic-bezier(0.2, 0.8, 0.4, 1);;
+  animation: expandRight 2s cubic-bezier(0.2, 0.8, 0.4, 1);
 }
 
-
 @keyframes expandRight {
-    0% {
-        transform: scaleX(0);
-    }
+  0% {
+    transform: scaleX(0);
+  }
 
-    100% {
-        transform: scaleX(1);
-    }
+  100% {
+    transform: scaleX(1);
+  }
 }

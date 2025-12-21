@@ -65,3 +65,7 @@ export const formatDate = (date: Date): IDateFormatted => {
     },
   };
 };
+
+export const uppercaseFirst = (value: string) => {
+  return value.slice(0, 1).toUpperCase() + value.slice(1);
+}

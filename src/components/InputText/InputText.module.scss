@@ -1,0 +1,35 @@
+.input-text {
+    user-select: none;
+    outline: none;
+
+    width: 20rem;
+}
+
+.container {
+  max-width: fit-content;
+  padding: .3rem .7rem;
+  border-radius: 20rem;
+  display: flex;
+  background-color: #ffffff10;
+  align-items: center;
+
+  transition: all .1s ease;
+
+  &__label {
+    width: 6rem;
+    color: #999;
+    user-select: none;
+  }
+
+  &:focus-within {
+    background-color: #ffffff30;
+  }
+
+  & > svg {
+    cursor: pointer;
+    color: #bbb;
+    &:hover {
+        color: #ddd;
+    }
+  }
+}

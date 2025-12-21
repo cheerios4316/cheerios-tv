@@ -17,9 +17,10 @@ export interface ILink {
 
 export interface IWeatherSettings {
   enable: boolean;
-  cityName: string;
-  latitude: number; // set in .env, not config.json!
-  longitude: number; // set in .env, not config.json!
+  position?: "top-right" | "top-left" | "bottom-right" | "bottom-left";
+  cityName?: string; // unused
+  latitude: number|null;
+  longitude: number|null;
 }
 
 export interface IFormattedValue<T = number> {
