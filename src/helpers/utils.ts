@@ -69,3 +69,5 @@ export const formatDate = (date: Date): IDateFormatted => {
 export const uppercaseFirst = (value: string) => {
   return value.slice(0, 1).toUpperCase() + value.slice(1);
 }
+
+export const isEmptyObject = (obj: object) => Object.keys(obj).length === 0;

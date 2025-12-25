@@ -22,7 +22,10 @@ export const getSettings = async () => {
 };
 
 export const getDefaultSettings = async (): Promise<ISettings> => ({
-  searchEndpoint: "https://duckduckgo.com/",
+  search: {
+    endpoint: "https://duckduckgo.com/",
+    enable: true,
+  },
   weather: {
     enable: true,
     position: "bottom-right",

@@ -22,11 +22,11 @@ const Home = async () => {
         </div>
       )}
 
-      <Drawer previewIcon={<Settings2 strokeWidth={1}/>}>
+      <Drawer previewIcon={<Settings2 strokeWidth={1} />}>
         <SettingsForm config={settings} />
       </Drawer>
 
-      {settings?.weather?.enable && settings.weather.latitude && settings.weather.longitude && (
+      {settings?.weather?.enable && settings.weather.latitude != null && settings.weather.longitude != null && (
         <div className={`${styles["weather"]} ${styles[`weather--${settings.weather.position ?? "top-left"}`]}`}>
           <Weather
             latitude={settings.weather.latitude}
@@ -36,9 +36,11 @@ const Home = async () => {
       )}
 
       <div className="flex flex-col md:flex-col-reverse items-center w-full">
-        <div className="w-full flex justify-center p-12">
-          <SearchBar endpoint={settings?.searchEndpoint ?? ""} />
-        </div>
+        { settings?.search.enable &&
+          <div className="w-full flex justify-center p-12">
+            <SearchBar endpoint={settings?.search.endpoint ?? ""} />
+          </div>
+        }
         <div className="flex flex-col items-center w-full gap-10 overflow-hidden">
           <div className="">
             <Clock />

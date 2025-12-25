@@ -3,10 +3,15 @@ import { Metadata } from "next";
 
 export interface ISettings {
   links: ILink[];
-  searchEndpoint: string;
+  search: ISearchSettings;
   backgroundImage?: string;
   metadata?: Metadata;
   weather?: IWeatherSettings;
+}
+
+export interface ISearchSettings {
+  enable: boolean;
+  endpoint: string;
 }
 
 export interface ILink {
@@ -19,8 +24,8 @@ export interface IWeatherSettings {
   enable: boolean;
   position?: "top-right" | "top-left" | "bottom-right" | "bottom-left";
   cityName?: string; // unused
-  latitude: number|null;
-  longitude: number|null;
+  latitude: number | null;
+  longitude: number | null;
 }
 
 export interface IFormattedValue<T = number> {

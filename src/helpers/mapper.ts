@@ -19,7 +19,10 @@ const mapLinks = (formData: FormData): ILink[] => {
 
 const mapSettings = (formData: FormData): ISettings => {
   return {
-    searchEndpoint: formData.get("search-endpoint") as string,
+    search: {
+      endpoint: formData.get("search-endpoint") as string,
+      enable: formData.get("enable-search") === "true",
+    },
     backgroundImage: formData.get("background-image") as string,
     weather: {
       enable: formData.get("weather-enable") === "true",

@@ -54,12 +54,17 @@ const SettingsForm: FC<ISettingsFormProps> = ({ config }) => {
           className={styles["settings-form__content__form"]}
           onSubmit={onSubmit}
         >
-          <SettingsSection title="Search endpoint">
+          <SettingsSection title="Search">
+            <InputToggle
+              inlineLabel="Enable"
+              name="enable-search"
+              value={config?.search.enable}
+            />
             <InputText
-              inlineLabel="URL/path"
+              inlineLabel="Endpoint"
               name="search-endpoint"
               placeholder="Search endpoint"
-              value={config?.searchEndpoint}
+              value={config?.search.endpoint}
             />
           </SettingsSection>
           <SettingsSection title="Background image">

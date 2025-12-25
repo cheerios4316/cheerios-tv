@@ -2,13 +2,17 @@ import { IWeatherDtoOut, IWeatherResponse } from "@/interface/api";
 import { NextRequest } from "next/server";
 
 export async function GET(request: NextRequest) {
-  const uri = process.env.WEATHER_API_URI ?? "";
+  const uri = process.env.WEATHER_API_URI;
+  
+  if(!uri) {
+    return Response.json({});
+  }
 
   const queryParams = request.nextUrl.searchParams;
   const latitude = queryParams.get("latitude");
   const longitude = queryParams.get("longitude");
 
-  if (!latitude || !longitude) {
+  if (latitude == null || longitude == null) {
     return new Response("Bad request", { status: 400 });
   }
 

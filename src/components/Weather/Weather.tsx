@@ -6,12 +6,10 @@ import { fetchWeather } from "@/actions/fetch-weather";
 import { IWeatherResponse } from "@/interface/api";
 import { getWeatherIcon } from "@/helpers/weather";
 import {
-  ArrowUp01,
-  ArrowUpAz,
-  ArrowUpCircle,
   ArrowUpFromDot,
   Loader2,
 } from "lucide-react";
+import { isEmptyObject } from "@/helpers/utils";
 
 interface IWeatherProps {
   latitude: number;
@@ -22,11 +20,16 @@ const FIFTEEN_MINUTES = 10 * 60 * 1000;
 
 const Weather: FC<IWeatherProps> = ({ latitude, longitude }) => {
   const [weatherData, setWeatherData] = useState<IWeatherResponse | null>(null);
+  const [emptyResponse, setEmptyResponse] = useState<boolean>(false);
 
   const getWeather = async () => {
     const data = await fetchWeather(latitude, longitude);
 
-    setWeatherData(data);
+    setEmptyResponse(isEmptyObject(data) || data === null);
+    
+    if (!emptyResponse) {
+      setWeatherData(data);
+    }
   };
 
   useEffect(() => {
@@ -43,6 +46,10 @@ const Weather: FC<IWeatherProps> = ({ latitude, longitude }) => {
   };
 
   if (!weatherData) {
+    if(emptyResponse) {
+      return null;
+    }
+
     return (
       <div className={styles["loader"]}>
         <Loader2 strokeWidth={2} />
@@ -54,13 +61,14 @@ const Weather: FC<IWeatherProps> = ({ latitude, longitude }) => {
     weatherData.weatherCodeWmo,
     weatherData.isDay
   );
+  
   const Icon = displayData.icon;
 
   return (
     <div className={styles["container"]}>
       <div className={styles["container__wind"]}>
         <div className="w-full flex justify-center">
-          <ArrowUpFromDot size={24} style={{transform: `rotate(${weatherData.wind.directionDeg}deg)`}}/>
+          <ArrowUpFromDot size={24} style={{ transform: `rotate(${weatherData.wind.directionDeg}deg)` }} />
         </div>
         <div className={styles["container__wind__speed"]}>
           <span className={styles["container__wind__speed__value"]}>
