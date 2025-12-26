@@ -8,6 +8,7 @@ import { Weather } from "@/components/Weather/Weather";
 import { Drawer } from "@/components/Drawer/Drawer";
 import { Settings2 } from "lucide-react";
 import { SettingsForm } from "@/components/SettingsForm/SettingsForm";
+import dynamic from "next/dynamic";
 
 const Home = async () => {
   const settings = await getSettings();
@@ -36,13 +37,13 @@ const Home = async () => {
       )}
 
       <div className="flex flex-col md:flex-col-reverse items-center w-full">
-        { settings?.search.enable &&
+        {settings?.search.enable &&
           <div className="w-full flex justify-center p-12">
             <SearchBar endpoint={settings?.search.endpoint ?? ""} />
           </div>
         }
         <div className="flex flex-col items-center w-full gap-10 overflow-hidden">
-          <div className="">
+          <div>
             <Clock />
           </div>
           <div className={`${styles["separator"]} w-86 h-px bg-white`}></div>

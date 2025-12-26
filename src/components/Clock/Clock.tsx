@@ -29,7 +29,7 @@ const Clock: FC = () => {
         <span>:</span>
         <span>{formattedDate.time.minutes.formatted}</span>
         <span>:</span>
-        <span>{formattedDate.time.seconds.formatted}</span>
+        <span suppressHydrationWarning>{formattedDate.time.seconds.formatted}</span>
       </div>
     </div>
   );
