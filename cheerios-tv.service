@@ -1,13 +1,15 @@
+# Systemd service to start this program with your server or PC
+
 [Unit]
 Description=Instance of Cheerios tV
 After=network.target
 
 [Service]
 Type=simple
-User=cheerios
-WorkingDirectory=/home/cheerios/code/cheerios-tv
+User=<YOUR USER>
+WorkingDirectory=/path/to/cheerios-tv
 Environment=NODE_ENV=production
-ExecStart=/usr/bin/npm run start -- -p 4316
+ExecStart=/usr/bin/npm run start -- -p <YOUR PORT>
 Restart=always
 RestartSec=5
 

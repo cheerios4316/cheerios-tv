@@ -1,0 +1,14 @@
+# Use this to pass local files directly to the cheerios-tv gui settings
+
+[Unit]
+Description=Image Server
+After=network.target
+
+[Service]
+User=<YOUR USER>
+#Group=<YOUR GROUP>
+ExecStart=/usr/bin/caddy file-server --root /path/to/your/images --listen :<YOUR PORT> --browse
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
