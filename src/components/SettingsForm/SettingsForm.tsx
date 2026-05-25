@@ -10,6 +10,7 @@ import { InputArray } from "../InputArray/InputArray";
 import { mapper } from "@/helpers/mapper";
 import { setCookie } from "@/actions/set-cookie";
 import { InputSelect } from "../InputSelect/InputSelect";
+import { usePosition } from "@/hooks/usePosition";
 
 interface ISettingsFormProps {
   config: ISettings | null;
@@ -19,6 +20,8 @@ const SettingsForm: FC<ISettingsFormProps> = ({ config }) => {
   const ref = useRef<HTMLFormElement>(null);
 
   const [links, setLinks] = useState(config?.links ?? []);
+
+  const { position, error, getPosition } = usePosition();
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -32,6 +35,24 @@ const SettingsForm: FC<ISettingsFormProps> = ({ config }) => {
 
     setCookie("settings", JSON.stringify(newSettings));
   };
+
+  const grabPosition = () => {
+    getPosition();
+  }
+
+  useEffect(() => {
+    if (position) {
+      console.log(position);
+
+      const latitudeFIeld = document.getElementsByName("weather-latitude")[0] as HTMLInputElement;
+      const longitudeField = document.getElementsByName("weather-longitude")[0] as HTMLInputElement;
+
+      console.log(latitudeFIeld, longitudeField);
+
+      latitudeFIeld.value = position.coords.latitude.toString();
+      longitudeField.value = position.coords.longitude.toString();
+    }
+  }, [position, error]);
 
   useEffect(() => {
     (window as any).getSettings = () => {
@@ -93,6 +114,13 @@ const SettingsForm: FC<ISettingsFormProps> = ({ config }) => {
               placeholder="Longitude"
               value={config?.weather?.longitude?.toString()}
             />
+            <button
+              className={styles["settings-form__actions__position-button"]}
+              onClick={grabPosition}
+              type="button"
+            >
+              Use current position
+            </button>
             <InputSelect
               title="Position"
               name="weather-position"

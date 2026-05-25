@@ -19,7 +19,7 @@ const Home = async () => {
     <main className={`${"flex items-center h-[100vh]"}`}>
       {settings?.backgroundImage && (
         <div className={styles["background"]}>
-          <Image src={settings.backgroundImage} alt="Background" fill />
+          <Image unoptimized src={settings.backgroundImage} alt="Background" fill />
         </div>
       )}
 

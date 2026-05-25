@@ -24,6 +24,19 @@
   }
 
   &__actions {
+    &__position-button {
+        cursor: pointer;
+        padding: .3rem .6rem;
+        width: fit-content;
+        background-color: #ffffff30;
+        border-radius: 2rem;
+        transition: all .2s ease;
+
+        &:hover {
+            background-color: #ffffff60;
+        }
+    }
+
     &__save-button {
         cursor: pointer;
         padding: .5rem 1rem;
