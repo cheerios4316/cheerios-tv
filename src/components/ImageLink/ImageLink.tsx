@@ -22,7 +22,7 @@ const ImageLink: FC<IImageLinkProps> = ({ imageUrl, anchor, href }) => {
     <div className={styles["image-link"]} onClick={onClick}>
       <div className={styles["image-link__container"]}>
         <div className={styles["image-link__background"]}></div>
-        <Image unoptimized src={imageUrl} alt={anchor} width={imageSize} height={imageSize} />
+        <img src={imageUrl} alt={anchor} width={imageSize} height={imageSize} />
       </div>
       <span>{anchor}<div className={styles["subtitle"]}></div></span>
     </div>
