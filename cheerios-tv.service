@@ -1,0 +1,15 @@
+[Unit]
+Description=Instance of Cheerios tV
+After=network.target
+
+[Service]
+Type=simple
+User=cheerios
+WorkingDirectory=/home/cheerios/code/cheerios-tv
+Environment=NODE_ENV=production
+ExecStart=/usr/bin/npm run start -- -p 4316
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
