@@ -42,6 +42,22 @@ const ClickHoldContent: FC<IClickHoldProps> = ({
   const holdTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
+    const hasTextSelection = () => {
+      const selection = window.getSelection();
+
+      if (selection && !selection.isCollapsed && selection.toString().length) {
+        return true;
+      }
+
+      const activeElement = document.activeElement;
+
+      return (
+        (activeElement instanceof HTMLInputElement ||
+          activeElement instanceof HTMLTextAreaElement) &&
+        activeElement.selectionStart !== activeElement.selectionEnd
+      );
+    };
+
     const clearHoldTimer = () => {
       if (holdTimerRef.current !== null) {
         clearTimeout(holdTimerRef.current);
@@ -50,11 +66,18 @@ const ClickHoldContent: FC<IClickHoldProps> = ({
     };
 
     const showContent = (event: MouseEvent) => {
-      if (event.button === 0 && !(toggle && isVisible)) {
+      if (
+        event.button === 0 &&
+        !(toggle && isVisible) &&
+        !hasTextSelection()
+      ) {
         clearHoldTimer();
         setPointerPosition({ x: event.clientX, y: event.clientY });
         holdTimerRef.current = setTimeout(() => {
-          setIsVisible(true);
+          if (!hasTextSelection()) {
+            setIsVisible(true);
+          }
+
           holdTimerRef.current = null;
         }, Math.max(0, holdDuration));
       }
@@ -74,6 +97,12 @@ const ClickHoldContent: FC<IClickHoldProps> = ({
       }
     };
 
+    const handleSelectionChange = () => {
+      if (hasTextSelection()) {
+        clearHoldTimer();
+      }
+    };
+
     const close = () => setIsVisible(false);
     const handleCloseClick = (event: MouseEvent) => {
       if (
@@ -88,6 +117,7 @@ const ClickHoldContent: FC<IClickHoldProps> = ({
     document.addEventListener("mouseup", endHold);
     document.addEventListener("dragend", endHold);
     document.addEventListener("visibilitychange", handleVisibilityChange);
+    document.addEventListener("selectionchange", handleSelectionChange);
     document.addEventListener("click", handleCloseClick);
     window.addEventListener(closeEvent, close);
     window.addEventListener("blur", endHold);
@@ -98,6 +128,7 @@ const ClickHoldContent: FC<IClickHoldProps> = ({
       document.removeEventListener("mouseup", endHold);
       document.removeEventListener("dragend", endHold);
       document.removeEventListener("visibilitychange", handleVisibilityChange);
+      document.removeEventListener("selectionchange", handleSelectionChange);
       document.removeEventListener("click", handleCloseClick);
       window.removeEventListener(closeEvent, close);
       window.removeEventListener("blur", endHold);

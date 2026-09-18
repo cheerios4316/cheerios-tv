@@ -25,6 +25,7 @@ export const getDefaultSettings = async (): Promise<ISettings> => ({
   enableRadialSelector: true,
   radialSelectorSize: 200,
   selectorIconInset: 1,
+  youtubeToken: undefined,
   search: {
     endpoint: "https://duckduckgo.com/",
     enable: true,

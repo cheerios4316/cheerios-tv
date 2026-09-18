@@ -11,6 +11,7 @@ import { mapper } from "@/helpers/mapper";
 import { setCookie } from "@/actions/set-cookie";
 import { InputSelect } from "../InputSelect/InputSelect";
 import { usePosition } from "@/hooks/usePosition";
+import { YouTubeLogin } from "@/components/YouTubeLogin/YouTubeLogin";
 
 interface ISettingsFormProps {
   config: ISettings | null;
@@ -18,10 +19,26 @@ interface ISettingsFormProps {
 
 const SettingsForm: FC<ISettingsFormProps> = ({ config }) => {
   const ref = useRef<HTMLFormElement>(null);
+  const submitAfterTokenChangeRef = useRef(false);
+
+  console.log(config)
 
   const [links, setLinks] = useState(config?.links ?? []);
+  const [youtubeToken, setYoutubeToken] = useState<string | undefined>(
+    config?.youtubeToken,
+  );
 
   const { position, error, getPosition } = usePosition();
+
+  const handleLogout = () => {
+    submitAfterTokenChangeRef.current = true;
+    setYoutubeToken(undefined);
+  }
+
+  const handleLogin = (token: string) => {
+    submitAfterTokenChangeRef.current = true;
+    setYoutubeToken(token);
+  }
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -39,6 +56,13 @@ const SettingsForm: FC<ISettingsFormProps> = ({ config }) => {
   const grabPosition = () => {
     getPosition();
   }
+
+  useEffect(() => {
+    if (submitAfterTokenChangeRef.current) {
+      submitAfterTokenChangeRef.current = false;
+      ref.current?.requestSubmit();
+    }
+  }, [youtubeToken]);
 
   useEffect(() => {
     if (position) {
@@ -83,6 +107,19 @@ const SettingsForm: FC<ISettingsFormProps> = ({ config }) => {
               name="search-endpoint"
               placeholder="Search endpoint"
               value={config?.search.endpoint}
+            />
+          </SettingsSection>
+          <SettingsSection title={"YouTube settings"}>
+            <YouTubeLogin
+              token={youtubeToken}
+              onTokenReceive={handleLogin}
+              onLogout={handleLogout}
+            />
+            <input
+              type="hidden"
+              name="youtube-token"
+              value={youtubeToken ?? ""}
+              readOnly
             />
           </SettingsSection>
           <SettingsSection title={"Radial menu"}>

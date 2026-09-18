@@ -11,5 +11,5 @@ export async function setCookie(
   }
 ) {
   const cookieStore = await cookies();
-  cookieStore.set(name, value, options);
+  cookieStore.set(name, value, { path: "/", ...options });
 }

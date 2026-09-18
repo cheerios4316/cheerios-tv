@@ -18,7 +18,12 @@ const mapLinks = (formData: FormData): ILink[] => {
 };
 
 const mapSettings = (formData: FormData): ISettings => {
+  const ytToken = formData.get("youtube-token") as string
+
+  const youtubeToken = ytToken == "" ? undefined : ytToken;
+
   return {
+    youtubeToken,
     enableRadialSelector: formData.get("radial-selector-on") === "true",
     radialSelectorSize: Number(formData.get("radial-selector-size")),
     selectorIconInset: Number(formData.get("icon-inset")),

@@ -10,6 +10,7 @@ export interface ISettings {
   enableRadialSelector?: boolean;
   radialSelectorSize?: number;
   selectorIconInset?: number;
+  youtubeToken?: string|undefined;
 }
 
 export interface ISearchSettings {

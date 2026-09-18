@@ -65,17 +65,6 @@ const Drawer: FC<IDrawerProps> = ({ children, previewIcon }) => {
     };
   }, [isDrawerOpen, setIsDrawerOpen]);
 
-  const handleScroll: UIEventHandler<HTMLDivElement> = (e) => {
-    const el = e.currentTarget;
-
-    const visiblePercent = el.clientHeight / el.scrollHeight;
-
-    const belowPercent =
-      (el.scrollHeight - el.clientHeight - el.scrollTop) / el.scrollHeight;
-
-    console.log({ visiblePercent, belowPercent });
-  };
-
   return (
     <div className={styles["container"]}>
       <div
@@ -92,7 +81,7 @@ const Drawer: FC<IDrawerProps> = ({ children, previewIcon }) => {
           styles[`drawer--${isDrawerOpen ? "open" : "hidden"}`]
         }`}
       >
-        <div className={styles["drawer__content"]} onScroll={handleScroll}>
+        <div className={styles["drawer__content"]}>
           <div
             className={styles["drawer__content__close-button"]}
             onClick={closeModal}
