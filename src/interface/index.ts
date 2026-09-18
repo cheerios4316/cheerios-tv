@@ -8,6 +8,8 @@ export interface ISettings {
   metadata?: Metadata;
   weather?: IWeatherSettings;
   enableRadialSelector?: boolean;
+  radialSelectorSize?: number;
+  selectorIconInset?: number;
 }
 
 export interface ISearchSettings {

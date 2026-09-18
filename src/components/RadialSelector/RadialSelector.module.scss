@@ -8,9 +8,11 @@
 
   &__background {
     position: absolute;
+    left: 0;
+    top: 0;
     width: calc(var(--radius) * 2.1);
     height: calc(var(--radius) * 2.1);
-    transform: translate(-50%, -45%);
+    transform: translate(-50%, -50%);
     border-radius: 100%;
     background-color: #ffffff22;
     z-index: 1000;
@@ -19,7 +21,9 @@
   }
 
   &__exit {
-    position: relative;
+    position: absolute;
+    left: 0;
+    top: 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -30,7 +34,7 @@
     box-sizing: content-box;
     border: 1px solid #00000000;
     border-radius: 100%;
-    transform: translate(-50%, -43%);
+    transform: translate(-50%, -50%);
     transition: all .2s ease;
     cursor: pointer;
 
@@ -50,19 +54,24 @@
   &__item {
     position: absolute;
     z-index: 3200;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     left: 0;
     top: 0;
-    width: 4rem;
-    height: 4rem;
-    transform: translate(-50%, -50%) rotate(calc(360deg / var(--count) * var(--index))) translateX(var(--radius)) rotate(calc(-360deg / var(--count) * var(--index)));
+    width: 0;
+    height: 0;
+    transform-origin: 0 0;
+    transform: rotate(calc(360deg / var(--count) * var(--index))) translateX(calc(var(--radius) * var(--icon-inset))) rotate(calc(-360deg / var(--count) * var(--index)));
 
-    & > a >img {
-      flex: none;
-      width: 4rem;
-      height: 4rem;
+    & > a {
+      position: absolute;
+      display: block;
+      line-height: 0;
+      transform: translate(-50%, -50%);
+    }
+
+    & > a > img {
+      display: block;
+      width: calc(4rem * var(--icon-scale));
+      height: calc(4rem * var(--icon-scale));
       max-width: none;
       object-fit: contain;
       transition: all .1s ease;

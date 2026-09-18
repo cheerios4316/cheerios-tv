@@ -9,9 +9,10 @@ import {UndoDot} from "lucide-react";
 interface IRadialSelectorProps {
     links: ILink[];
     radius?: number;
+    iconInset?: number;
 }
 
-const RadialSelector: FC<IRadialSelectorProps> = ({links, radius = 140}) => {
+const RadialSelector: FC<IRadialSelectorProps> = ({links, radius = 200, iconInset = 1}) => {
     const initialMousePosition = useClickHoldPosition();
     const selectorRef = useRef<HTMLDivElement>(null);
 
@@ -51,6 +52,8 @@ const RadialSelector: FC<IRadialSelectorProps> = ({links, radius = 140}) => {
                     {
                         "--radius": `${radius}px`,
                         "--count": links.length,
+                        "--icon-scale": (radius / 150),
+                        "--icon-inset": (iconInset),
                         visibility: "hidden",
                     } as CSSProperties
                 }

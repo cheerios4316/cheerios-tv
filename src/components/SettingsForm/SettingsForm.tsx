@@ -87,6 +87,8 @@ const SettingsForm: FC<ISettingsFormProps> = ({ config }) => {
           </SettingsSection>
           <SettingsSection title={"Radial menu"}>
             <InputToggle name={"radial-selector-on"} inlineLabel="Enable" value={config?.enableRadialSelector} />
+            <InputText type="number" name={"radial-selector-size"} inlineLabel={"Radius (px)"} value={config?.radialSelectorSize?.toString()} />
+            <InputText type="number" name={"icon-inset"} inlineLabel={"Icon inset"} value={config?.selectorIconInset?.toString()} />
           </SettingsSection>
           <SettingsSection title="Background image">
             <InputText

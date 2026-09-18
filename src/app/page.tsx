@@ -28,7 +28,7 @@ const Home = async () => {
             </Drawer>
 
             {settings?.enableRadialSelector && (<ClickHold toggle>
-                <RadialSelector links={links}/>
+                <RadialSelector links={links} radius={settings.radialSelectorSize ?? 200} iconInset={settings.selectorIconInset ?? 1}/>
             </ClickHold>)}
 
             {settings?.weather?.enable && settings.weather.latitude != null && settings.weather.longitude != null && (
