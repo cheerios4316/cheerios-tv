@@ -42,14 +42,11 @@ const SettingsForm: FC<ISettingsFormProps> = ({ config }) => {
 
   useEffect(() => {
     if (position) {
-      console.log(position);
 
-      const latitudeFIeld = document.getElementsByName("weather-latitude")[0] as HTMLInputElement;
+      const latitudeField = document.getElementsByName("weather-latitude")[0] as HTMLInputElement;
       const longitudeField = document.getElementsByName("weather-longitude")[0] as HTMLInputElement;
 
-      console.log(latitudeFIeld, longitudeField);
-
-      latitudeFIeld.value = position.coords.latitude.toString();
+      latitudeField.value = position.coords.latitude.toString();
       longitudeField.value = position.coords.longitude.toString();
     }
   }, [position, error]);
@@ -87,6 +84,9 @@ const SettingsForm: FC<ISettingsFormProps> = ({ config }) => {
               placeholder="Search endpoint"
               value={config?.search.endpoint}
             />
+          </SettingsSection>
+          <SettingsSection title={"Radial menu"}>
+            <InputToggle name={"radial-selector-on"} inlineLabel="Enable" value={config?.enableRadialSelector} />
           </SettingsSection>
           <SettingsSection title="Background image">
             <InputText

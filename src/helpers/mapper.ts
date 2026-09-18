@@ -19,6 +19,7 @@ const mapLinks = (formData: FormData): ILink[] => {
 
 const mapSettings = (formData: FormData): ISettings => {
   return {
+    enableRadialSelector: formData.get("radial-selector-on") === "true",
     search: {
       endpoint: formData.get("search-endpoint") as string,
       enable: formData.get("enable-search") === "true",

@@ -10,6 +10,7 @@ import {
 } from "react";
 import styles from "./Drawer.module.scss";
 import { X } from "lucide-react";
+import { useDrawer } from "./DrawerContext";
 
 interface IDrawerProps {
   children: ReactNode;
@@ -18,19 +19,18 @@ interface IDrawerProps {
 
 const Drawer: FC<IDrawerProps> = ({ children, previewIcon }) => {
   const drawerRef = useRef<HTMLDivElement>(null);
+  const { isDrawerOpen, setIsDrawerOpen } = useDrawer();
 
   const [previewStatus, setPreviewStatus] = useState<"hidden" | "open">(
     "hidden"
   );
-  const [drawerStatus, setDrawerStatus] = useState<"hidden" | "open">("hidden");
-
   const openDrawer = () => {
     setPreviewStatus("hidden");
-    setDrawerStatus("open");
+    setIsDrawerOpen(true);
   };
 
   const closeModal = () => {
-    setDrawerStatus("hidden");
+    setIsDrawerOpen(false);
   };
 
   useEffect(() => {
@@ -39,7 +39,7 @@ const Drawer: FC<IDrawerProps> = ({ children, previewIcon }) => {
         event.clientX > window.innerWidth * 0.8 &&
         event.clientY < window.innerHeight * 0.3;
 
-      if (inInterestArea && drawerStatus === "hidden") {
+      if (inInterestArea && !isDrawerOpen) {
         setPreviewStatus("open");
       } else {
         setPreviewStatus("hidden");
@@ -48,11 +48,11 @@ const Drawer: FC<IDrawerProps> = ({ children, previewIcon }) => {
 
     const clickHandler = (event: MouseEvent) => {
       if (
-        drawerStatus === "open" &&
+        isDrawerOpen &&
         drawerRef.current &&
         !drawerRef.current.contains(event.target as Node)
       ) {
-        setDrawerStatus("hidden");
+        setIsDrawerOpen(false);
       }
     };
 
@@ -63,7 +63,7 @@ const Drawer: FC<IDrawerProps> = ({ children, previewIcon }) => {
       document.removeEventListener("mousedown", clickHandler);
       document.removeEventListener("mousemove", moveHandler);
     };
-  }, [drawerStatus]);
+  }, [isDrawerOpen, setIsDrawerOpen]);
 
   const handleScroll: UIEventHandler<HTMLDivElement> = (e) => {
     const el = e.currentTarget;
@@ -88,7 +88,9 @@ const Drawer: FC<IDrawerProps> = ({ children, previewIcon }) => {
       </div>
       <div
         ref={drawerRef}
-        className={`${styles["drawer"]} ${styles[`drawer--${drawerStatus}`]}`}
+        className={`${styles["drawer"]} ${
+          styles[`drawer--${isDrawerOpen ? "open" : "hidden"}`]
+        }`}
       >
         <div className={styles["drawer__content"]} onScroll={handleScroll}>
           <div

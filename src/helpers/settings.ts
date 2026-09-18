@@ -22,6 +22,7 @@ export const getSettings = async () => {
 };
 
 export const getDefaultSettings = async (): Promise<ISettings> => ({
+  enableRadialSelector: true,
   search: {
     endpoint: "https://duckduckgo.com/",
     enable: true,

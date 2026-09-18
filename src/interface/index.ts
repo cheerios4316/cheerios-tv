@@ -7,6 +7,7 @@ export interface ISettings {
   backgroundImage?: string;
   metadata?: Metadata;
   weather?: IWeatherSettings;
+  enableRadialSelector?: boolean;
 }
 
 export interface ISearchSettings {

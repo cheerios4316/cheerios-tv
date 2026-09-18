@@ -1,66 +1,71 @@
-import { Clock } from "@/components/Clock/Clock";
-import { ImageLink } from "@/components/ImageLink/ImageLink";
+import {Clock} from "@/components/Clock/Clock";
+import {ImageLink} from "@/components/ImageLink/ImageLink";
 import styles from "./page.module.scss";
-import { SearchBar } from "@/components/SearchBar/SearchBar";
-import { getSettings } from "@/helpers/settings";
+import {SearchBar} from "@/components/SearchBar/SearchBar";
+import {getSettings} from "@/helpers/settings";
 import Image from "next/image";
-import { Weather } from "@/components/Weather/Weather";
-import { Drawer } from "@/components/Drawer/Drawer";
-import { Settings2 } from "lucide-react";
-import { SettingsForm } from "@/components/SettingsForm/SettingsForm";
-import dynamic from "next/dynamic";
+import {Weather} from "@/components/Weather/Weather";
+import {Drawer} from "@/components/Drawer/Drawer";
+import {Settings2} from "lucide-react";
+import {SettingsForm} from "@/components/SettingsForm/SettingsForm";
+import {ClickHold} from "@/components/ClickHold/ClickHold";
+import {RadialSelector} from "@/components/RadialSelector/RadialSelector";
 
 const Home = async () => {
-  const settings = await getSettings();
+    const settings = await getSettings();
 
-  const links = settings?.links ?? [];
+    const links = settings?.links ?? [];
+    return (
+        <main className={`${"flex items-center h-[100vh]"}`}>
+            {settings?.backgroundImage && (
+                <div className={styles["background"]}>
+                    <Image unoptimized src={settings.backgroundImage} alt="Background" fill/>
+                </div>
+            )}
 
-  return (
-    <main className={`${"flex items-center h-[100vh]"}`}>
-      {settings?.backgroundImage && (
-        <div className={styles["background"]}>
-          <Image unoptimized src={settings.backgroundImage} alt="Background" fill />
-        </div>
-      )}
+            <Drawer previewIcon={<Settings2 strokeWidth={1}/>}>
+                <SettingsForm config={settings}/>
+            </Drawer>
 
-      <Drawer previewIcon={<Settings2 strokeWidth={1} />}>
-        <SettingsForm config={settings} />
-      </Drawer>
+            {settings?.enableRadialSelector && (<ClickHold toggle>
+                <RadialSelector links={links}/>
+            </ClickHold>)}
 
-      {settings?.weather?.enable && settings.weather.latitude != null && settings.weather.longitude != null && (
-        <div className={`${styles["weather"]} ${styles[`weather--${settings.weather.position ?? "top-left"}`]}`}>
-          <Weather
-            latitude={settings.weather.latitude}
-            longitude={settings.weather.longitude}
-          />
-        </div>
-      )}
+            {settings?.weather?.enable && settings.weather.latitude != null && settings.weather.longitude != null && (
+                <div
+                    className={`${styles["weather"]} ${styles[`weather--${settings.weather.position ?? "top-left"}`]}`}>
+                    <Weather
+                        latitude={settings.weather.latitude}
+                        longitude={settings.weather.longitude}
+                    />
+                </div>
+            )}
 
-      <div className="flex flex-col md:flex-col-reverse items-center w-full">
-        {settings?.search.enable &&
-          <div className="w-full flex justify-center p-12">
-            <SearchBar endpoint={settings?.search.endpoint ?? ""} />
-          </div>
-        }
-        <div className="flex flex-col items-center w-full gap-10 overflow-hidden">
-          <div>
-            <Clock />
-          </div>
-          <div className={`${styles["separator"]} w-86 h-px bg-white`}></div>
-          <div className="flex flex-col md:flex-row items-center justify-center gap:8 md:gap-10">
-            {links.map((link) => (
-              <ImageLink
-                key={link.url}
-                imageUrl={link.image}
-                anchor={link.anchor}
-                href={link.url}
-              />
-            ))}
-          </div>
-        </div>
-      </div>
-    </main>
-  );
+            <div className="flex flex-col md:flex-col-reverse items-center w-full">
+                {settings?.search.enable &&
+                    <div className="w-full flex justify-center p-12">
+                        <SearchBar endpoint={settings?.search.endpoint ?? ""}/>
+                    </div>
+                }
+                <div className="flex flex-col items-center w-full gap-10 overflow-hidden">
+                    <div>
+                        <Clock/>
+                    </div>
+                    <div className={`${styles["separator"]} w-86 h-px bg-white`}></div>
+                    <div className="flex flex-col md:flex-row items-center justify-center gap:8 md:gap-10">
+                        {links.map((link) => (
+                            <ImageLink
+                                key={link.url}
+                                imageUrl={link.image}
+                                anchor={link.anchor}
+                                href={link.url}
+                            />
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </main>
+    );
 };
 
 export default Home;
