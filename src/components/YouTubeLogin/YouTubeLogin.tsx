@@ -2,7 +2,8 @@
 
 import {MouseEvent, useEffect, useRef, useState} from "react";
 import styles from "./YoutubeLogin.module.scss";
-import {ClipboardCopy} from "lucide-react";
+import {ClipboardCheckIcon, ClipboardCopy} from "lucide-react";
+import {clipboardCopy} from "@/helpers/clipboard";
 
 interface IYouTubeLoginProps {
     token: string | undefined;
@@ -98,12 +99,22 @@ const YouTubeLogin = ({
         useState<IVerificationDetails>();
     const requestControllerRef = useRef<AbortController>(null);
 
+    const [copiedIcon, setCopiedIcon] = useState<boolean>(false);
+
     useEffect(
         () => () => {
             requestControllerRef.current?.abort();
         },
         [],
     );
+
+    const copy = (text: string) => {
+        clipboardCopy(
+            text,
+            () => setCopiedIcon(true),
+            () => setCopiedIcon(false),
+        )
+    }
 
     const startLogin = async () => {
         requestControllerRef.current?.abort();
@@ -191,7 +202,10 @@ const YouTubeLogin = ({
                 {authenticationCode && (
                     <div className={styles["youtube-login__status__code"]}>
                         <code>{authenticationCode}</code>
-                        <span><ClipboardCopy size={18}/></span>
+                        <span onClick={() => copy(authenticationCode)}>
+                            {!copiedIcon && <ClipboardCopy size={18}/>}
+                            {copiedIcon && <ClipboardCheckIcon size={18}/>}
+                        </span>
                     </div>
                 )}
                 {status && <button className={styles["youtube-login__log-btn"]} onClick={handleLogout}>Cancel</button>}
