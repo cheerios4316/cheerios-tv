@@ -10,6 +10,7 @@ import {Settings2} from "lucide-react";
 import {SettingsForm} from "@/components/SettingsForm/SettingsForm";
 import {ClickHold} from "@/components/ClickHold/ClickHold";
 import {RadialSelector} from "@/components/RadialSelector/RadialSelector";
+import {TTS} from "@/components/TTS/TTS";
 
 const Home = async () => {
     const settings = await getSettings();
@@ -40,6 +41,8 @@ const Home = async () => {
                     />
                 </div>
             )}
+
+            <TTS />
 
             <div className="flex flex-col md:flex-col-reverse items-center w-full">
                 {settings?.search.enable &&
