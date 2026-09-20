@@ -20,6 +20,7 @@ const TTS: FC<ITTSProps> = () => {
 
       const recognizer = new model.KaldiRecognizer(ctx.sampleRate);
       recognizer.on("result", e => {
+        // @ts-ignore
         console.log(e.result.text);
       });
 
