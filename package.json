@@ -14,10 +14,12 @@
     "next": "16.0.10",
     "react": "19.2.1",
     "react-dom": "19.2.1",
-    "sass": "^1.97.0"
+    "sass": "^1.97.0",
+    "vosk-browser": "^0.0.8"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@types/dom-speech-recognition": "^0.0.12",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
